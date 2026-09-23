@@ -29,7 +29,7 @@
   </header>
 
   <main>
-    <section class="page-hero">
+    <section class="page-hero page-hero--photo" style="--page-hero-bg: url('images/polish-work.jpg')">
       <div class="container">
         <h1>How Ceramic Coating Works</h1>
         <p>Great ceramic coating is mostly prep. Here’s the process we follow so your finish bonds cleanly and lasts.</p>
@@ -38,7 +38,7 @@
 
     <section class="section">
       <div class="container">
-        <ol class="process-list">
+        <ol class="process-list" style="margin-bottom:2.5rem;">
           <li class="process-item">
             <div class="step-num" aria-hidden="true">1</div>
             <div>
@@ -46,27 +46,44 @@
               <p>We evaluate paint condition, existing swirls or oxidation, and how you use the vehicle. That drives package recommendation and correction level.</p>
             </div>
           </li>
-          <li class="process-item">
-            <div class="step-num" aria-hidden="true">2</div>
-            <div>
+        </ol>
+
+        <div class="process-splits">
+          <div class="split">
+            <div class="split-media">
+              <div class="img-frame"><img src="images/detailing-cloth.jpg" alt="Wash and decontamination with detailing cloth" width="800" height="520" loading="lazy"></div>
+            </div>
+            <div class="split-body">
+              <div class="step-num" aria-hidden="true">2</div>
               <h3>Wash &amp; Decontamination</h3>
               <p>A thorough wash removes loose dirt. Chemical and mechanical decontamination clear bonded contaminants so the surface is ready for correction and coating.</p>
             </div>
-          </li>
-          <li class="process-item">
-            <div class="step-num" aria-hidden="true">3</div>
-            <div>
+          </div>
+
+          <div class="split split--reverse">
+            <div class="split-media">
+              <div class="img-frame"><img src="images/polish-work.jpg" alt="Paint correction and polishing" width="800" height="520" loading="lazy"></div>
+            </div>
+            <div class="split-body">
+              <div class="step-num" aria-hidden="true">3</div>
               <h3>Paint Correction</h3>
               <p>Light polish or multi-stage correction as needed to reduce swirls and refine clarity — matching Essential, Premium, or Ultimate goals.</p>
             </div>
-          </li>
-          <li class="process-item">
-            <div class="step-num" aria-hidden="true">4</div>
-            <div>
+          </div>
+
+          <div class="split">
+            <div class="split-media">
+              <div class="img-frame"><img src="images/water-beads.jpg" alt="Ceramic coating hydrophobic water beads after application" width="800" height="520" loading="lazy"></div>
+            </div>
+            <div class="split-body">
+              <div class="step-num" aria-hidden="true">4</div>
               <h3>Ceramic Application</h3>
               <p>Professional ceramic is applied in controlled sections for even coverage and strong bonding to prepared paint.</p>
             </div>
-          </li>
+          </div>
+        </div>
+
+        <ol class="process-list" start="5" style="margin-top:0.5rem;">
           <li class="process-item">
             <div class="step-num" aria-hidden="true">5</div>
             <div>
@@ -143,6 +160,7 @@
       <div class="footer-bottom">
         <span>&copy; <span id="y"></span> Leesburg Ceramic Coating. All rights reserved.</span>
         <span>Service-area business · Leesburg &amp; Loudoun County</span>
+        <span class="footer-attr">Stock photography for illustration — Unsplash.</span>
       </div>
     </div>
   </footer>
