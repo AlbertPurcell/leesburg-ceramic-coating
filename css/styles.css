@@ -609,6 +609,17 @@ ul { list-style: none; }
 }
 .form-success.is-visible { display: block; }
 
+.form-error {
+  display: none;
+  background: rgba(200, 60, 60, 0.15);
+  border: 1px solid rgba(200, 60, 60, 0.45);
+  color: #f0a0a0;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+.form-error.is-visible { display: block; }
+
 .form-hint {
   font-size: 0.8rem;
   color: var(--muted);
@@ -665,7 +676,8 @@ ul { list-style: none; }
 .mt-2 { margin-top: 1rem; }
 .mt-3 { margin-top: 1.5rem; }
 .text-center { text-align: center; }
-.sr-only {
+.sr-only,
+.hp-field {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -697,6 +709,8 @@ ul { list-style: none; }
   .header-cta .btn-ghost { display: none; }
   .site-header { position: sticky; }
   .header-inner { position: relative; flex-wrap: wrap; }
+  body { padding-bottom: 4.5rem; }
+  .mobile-call-bar { display: flex; }
 }
 
 /* ========== Photo / media helpers ========== */
@@ -823,3 +837,50 @@ ul { list-style: none; }
   max-width: 960px;
   margin-inline: auto;
 }
+
+
+/* Sticky mobile call bar — visible only under 900px */
+.mobile-call-bar {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 200;
+  gap: 0.65rem;
+  padding: 0.65rem 0.85rem calc(0.65rem + env(safe-area-inset-bottom, 0px));
+  background: rgba(7, 11, 20, 0.96);
+  backdrop-filter: blur(12px);
+  border-top: 1px solid var(--border);
+  box-shadow: 0 -8px 28px rgba(0, 0, 0, 0.4);
+}
+.mobile-call-bar__btn {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.75rem;
+  padding: 0.65rem 0.75rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  text-align: center;
+}
+.mobile-call-bar__btn:hover { text-decoration: none; }
+.mobile-call-bar__call {
+  background: var(--accent);
+  color: var(--white);
+  border: 1px solid transparent;
+}
+.mobile-call-bar__call:hover { background: var(--accent-hover); color: var(--white); }
+.mobile-call-bar__quote {
+  background: transparent;
+  color: var(--white);
+  border: 1px solid var(--slate);
+}
+.mobile-call-bar__quote:hover {
+  border-color: var(--accent);
+  color: var(--white);
+}
+

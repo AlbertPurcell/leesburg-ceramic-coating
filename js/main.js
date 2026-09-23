@@ -1,12 +1,45 @@
 /**
  * Leesburg Ceramic Coating — main.js
- * Mobile nav + contact form (mailto fallback).
- * To switch to Formspree later: set form action to your Formspree endpoint
- * and method="POST", then remove or bypass the mailto handler below.
- * Example: action="https://formspree.io/f/YOUR_FORM_ID"
+ * Mobile nav, phone from config, sticky mobile call bar, FormSubmit AJAX form.
  */
 (function () {
   "use strict";
+
+  var cfg = window.SITE_CONFIG || {};
+  var phoneDisplay = cfg.phoneDisplay || "(703) 643-9130";
+  var phoneTel = cfg.phoneTel || "+17036439130";
+  var formEndpoint =
+    cfg.formEndpoint ||
+    "https://formsubmit.co/ajax/" + (cfg.formEmail || "hello@leesburgceramiccoating.com");
+
+  function applyPhones() {
+    document.querySelectorAll(".js-phone").forEach(function (el) {
+      el.textContent = phoneDisplay;
+    });
+    document.querySelectorAll(".js-phone-link").forEach(function (el) {
+      el.setAttribute("href", "tel:" + phoneTel);
+    });
+  }
+
+  function injectMobileCallBar() {
+    if (document.querySelector(".mobile-call-bar")) return;
+
+    var onContact = /contact\.html/i.test(window.location.pathname);
+    var quoteHref = onContact ? "#quote-form" : "contact.html#quote-form";
+
+    var bar = document.createElement("div");
+    bar.className = "mobile-call-bar";
+    bar.setAttribute("role", "navigation");
+    bar.setAttribute("aria-label", "Quick contact");
+    bar.innerHTML =
+      '<a class="mobile-call-bar__btn mobile-call-bar__call js-phone-link" href="tel:' +
+      phoneTel +
+      '">Call Now</a>' +
+      '<a class="mobile-call-bar__btn mobile-call-bar__quote" href="' +
+      quoteHref +
+      '">Free Quote</a>';
+    document.body.appendChild(bar);
+  }
 
   // Mobile navigation
   var toggle = document.querySelector(".nav-toggle");
@@ -28,63 +61,106 @@
     });
   }
 
-  // Contact form — builds a mailto: link with filled fields
+  applyPhones();
+  injectMobileCallBar();
+  // Re-apply so sticky bar call link picks up js-phone-link class after inject
+  applyPhones();
+
+  // Contact form — FormSubmit.co AJAX (no mailto)
   var form = document.getElementById("quote-form");
   if (!form) return;
 
   var success = document.getElementById("form-success");
+  var errorBox = document.getElementById("form-error");
+  var submitBtn = form.querySelector('button[type="submit"]');
 
   form.addEventListener("submit", function (e) {
     e.preventDefault();
 
-    var name = (form.elements.namedItem("name") || {}).value || "";
-    var phone = (form.elements.namedItem("phone") || {}).value || "";
-    var email = (form.elements.namedItem("email") || {}).value || "";
-    var vehicle = (form.elements.namedItem("vehicle") || {}).value || "";
-    var zip = (form.elements.namedItem("zip") || {}).value || "";
-    var message = (form.elements.namedItem("message") || {}).value || "";
+    if (success) success.classList.remove("is-visible");
+    if (errorBox) {
+      errorBox.classList.remove("is-visible");
+      errorBox.textContent = "";
+    }
 
-    name = String(name).trim();
-    phone = String(phone).trim();
-    email = String(email).trim();
-    vehicle = String(vehicle).trim();
-    zip = String(zip).trim();
-    message = String(message).trim();
+    var name = String((form.elements.namedItem("name") || {}).value || "").trim();
+    var phone = String((form.elements.namedItem("phone") || {}).value || "").trim();
+    var email = String((form.elements.namedItem("email") || {}).value || "").trim();
+    var vehicle = String((form.elements.namedItem("vehicle") || {}).value || "").trim();
+    var zip = String((form.elements.namedItem("zip") || {}).value || "").trim();
+    var message = String((form.elements.namedItem("message") || {}).value || "").trim();
+    var honey = String((form.elements.namedItem("_honey") || {}).value || "").trim();
 
     if (!name || !phone) {
-      alert("Please enter your name and phone number so we can reach you.");
+      if (errorBox) {
+        errorBox.textContent = "Please enter your name and phone number so we can reach you.";
+        errorBox.classList.add("is-visible");
+      } else {
+        alert("Please enter your name and phone number so we can reach you.");
+      }
       return;
     }
 
-    var subject = "Free Ceramic Coating Quote — " + name;
-    var body = [
-      "New quote request from leesburgceramiccoating.com",
-      "",
-      "Name: " + name,
-      "Phone: " + phone,
-      "Email: " + email,
-      "Vehicle: " + vehicle,
-      "ZIP / Neighborhood: " + zip,
-      "",
-      "Message:",
-      message || "(none)"
-    ].join("\r\n");
-
-    var mailto =
-      "mailto:hello@leesburgceramiccoating.com" +
-      "?subject=" + encodeURIComponent(subject) +
-      "&body=" + encodeURIComponent(body);
-
-    // Open default mail client with pre-filled message
-    window.location.href = mailto;
-
-    if (success) {
-      success.classList.add("is-visible");
+    // Honeypot filled — pretend success, do not submit
+    if (honey) {
+      window.location.href = "thank-you.html";
+      return;
     }
 
-    // Soft reset after a beat so fields stay visible if mailto is cancelled
-    setTimeout(function () {
-      form.reset();
-    }, 800);
+    var payload = {
+      name: name,
+      phone: phone,
+      email: email,
+      vehicle: vehicle,
+      zip: zip,
+      message: message || "(none)",
+      _subject: "Free Ceramic Coating Quote — " + name,
+      _template: "table",
+      _captcha: "false"
+    };
+
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Sending…";
+    }
+
+    fetch(formEndpoint, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify(payload)
+    })
+      .then(function (res) {
+        return res.json().then(function (data) {
+          return { ok: res.ok, data: data };
+        });
+      })
+      .then(function (result) {
+        if (result.ok) {
+          window.location.href = "thank-you.html";
+          return;
+        }
+        throw new Error(
+          (result.data && (result.data.message || result.data.error)) ||
+            "Something went wrong. Please try again or call us."
+        );
+      })
+      .catch(function (err) {
+        var msg =
+          (err && err.message) ||
+          "We could not send your request. Please call " + phoneDisplay + " or try again.";
+        if (errorBox) {
+          errorBox.textContent = msg;
+          errorBox.classList.add("is-visible");
+        } else {
+          alert(msg);
+        }
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = "Request My Free Quote";
+        }
+      });
   });
 })();

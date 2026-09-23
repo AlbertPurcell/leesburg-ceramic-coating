@@ -8,6 +8,30 @@
   <link rel="canonical" href="https://leesburgceramiccoating.com/services.html">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="css/styles.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Leesburg Ceramic Coating",
+    "url": "https://leesburgceramiccoating.com",
+    "telephone": "+17036439130",
+    "email": "hello@leesburgceramiccoating.com",
+    "priceRange": "$$",
+    "description": "Professional ceramic coating for Leesburg and Loudoun County, VA.",
+    "areaServed": [
+      {"@type": "City", "name": "Leesburg", "containedInPlace": {"@type": "State", "name": "Virginia"}},
+      {"@type": "Place", "name": "Lansdowne"},
+      {"@type": "Place", "name": "River Creek"},
+      {"@type": "Place", "name": "Potomac Station"},
+      {"@type": "Place", "name": "Exeter"},
+      {"@type": "Place", "name": "Raspberry Falls"},
+      {"@type": "City", "name": "Ashburn"},
+      {"@type": "City", "name": "Purcellville"},
+      {"@type": "City", "name": "Hamilton"},
+      {"@type": "City", "name": "Sterling"}
+    ]
+  }
+  </script>
 </head>
 <body>
   <header class="site-header">
@@ -22,7 +46,7 @@
         <a href="contact.html">Contact</a>
       </nav>
       <div class="header-cta">
-        <a class="btn btn-ghost" href="tel:+17036439130">(703) 643-9130</a>
+        <a class="btn btn-ghost js-phone-link js-phone" href="tel:+17036439130">(703) 643-9130</a>
         <a class="btn btn-primary" href="contact.html">Get a Free Quote</a>
       </div>
     </div>
@@ -116,7 +140,7 @@
         <h2 style="color:var(--white);margin-bottom:0.75rem;">Pricing Note</h2>
         <p class="muted" style="max-width:36rem;margin:0 auto 1.5rem;">Final pricing depends on vehicle size and paint condition. We’ll assess your car and recommend the right package — no hard dollar amounts until we know what your paint needs.</p>
         <div class="cta-actions">
-          <a class="btn btn-primary btn-lg" href="tel:+17036439130">Call (703) 643-9130</a>
+          <a class="btn btn-primary btn-lg js-phone-link" href="tel:+17036439130">Call <span class="js-phone">(703) 643-9130</span></a>
           <a class="btn btn-outline btn-lg" href="contact.html">Get a Free Quote</a>
         </div>
       </div>
@@ -144,7 +168,7 @@
           <div class="footer-nap">
             <span>Leesburg Ceramic Coating</span>
             <span>Leesburg, VA</span>
-            <a href="tel:+17036439130">(703) 643-9130</a>
+            <a class="js-phone-link js-phone" href="tel:+17036439130">(703) 643-9130</a>
             <a href="mailto:hello@leesburgceramiccoating.com">hello@leesburgceramiccoating.com</a>
             <a href="https://leesburgceramiccoating.com">leesburgceramiccoating.com</a>
           </div>
@@ -158,6 +182,7 @@
     </div>
   </footer>
   <script>document.getElementById("y").textContent = new Date().getFullYear();</script>
+  <script src="js/config.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>
