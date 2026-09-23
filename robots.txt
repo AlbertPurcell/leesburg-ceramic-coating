@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://leesburgceramiccoating.com/sitemap.xml
