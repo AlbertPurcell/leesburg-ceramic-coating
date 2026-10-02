@@ -1,6 +1,6 @@
 # Leesburg Ceramic Coating — Static Marketing Site
 
-Self-contained static website for **Leesburg Ceramic Coating** (`leesburgceramiccoating.com`) — ceramic coating rank-and-rent / service-area business in Leesburg, VA and Loudoun County.
+Self-contained static website for **Leesburg Ceramic Coating** (`leesburgceramiccoating.com`) — veteran-owned, mostly mobile ceramic coating business serving Leesburg, VA and Loudoun County.
 
 ## Local preview
 
@@ -24,8 +24,9 @@ Any simple static server works (`npx serve`, VS Code Live Server, etc.).
 | `process.html` | Process + short FAQ |
 | `areas.html` | Service areas |
 | `contact.html` | Quote form + NAP |
+| `privacy.html` | Privacy Policy (generic template; needs owner/legal review) |
 | `css/styles.css` | Shared styles |
-| `js/main.js` | Mobile nav + mailto form |
+| `js/main.js` | Mobile nav, phone from config, FormSubmit form |
 | `favicon.svg` | Simple favicon |
 | `robots.txt` | Allow all crawlers |
 
