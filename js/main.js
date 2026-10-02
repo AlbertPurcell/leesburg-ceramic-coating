@@ -25,7 +25,7 @@
     if (document.querySelector(".mobile-call-bar")) return;
 
     var onContact = /contact\.html/i.test(window.location.pathname);
-    var quoteHref = onContact ? "#quote-form" : "contact.html#quote-form";
+    var quoteHref = onContact ? "#quote-form" : "/contact.html#quote-form";
 
     var bar = document.createElement("div");
     bar.className = "mobile-call-bar";
@@ -103,7 +103,7 @@
 
     // Honeypot filled — pretend success, do not submit
     if (honey) {
-      window.location.href = "thank-you.html";
+      window.location.href = "/thank-you.html";
       return;
     }
 
@@ -139,7 +139,7 @@
       })
       .then(function (result) {
         if (result.ok) {
-          window.location.href = "thank-you.html";
+          window.location.href = "/thank-you.html";
           return;
         }
         throw new Error(
