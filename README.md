@@ -69,7 +69,7 @@ When hosting on Netlify, add `netlify` (and optionally `name="quote"`) to the `<
 ## Business details
 
 - **Name:** Leesburg Ceramic Coating  
-- **Phone:** (703) 643-9130 — `tel:+17036439130`  
+- **Phone:** (703) 555-1212 — `tel:+17035551212`  
 - **Email:** hello@leesburgceramiccoating.com  
 - **Area:** Leesburg, VA & Loudoun County (service-area business — no street address)
 

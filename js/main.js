@@ -6,8 +6,8 @@
   "use strict";
 
   var cfg = window.SITE_CONFIG || {};
-  var phoneDisplay = cfg.phoneDisplay || "(703) 643-9130";
-  var phoneTel = cfg.phoneTel || "+17036439130";
+  var phoneDisplay = cfg.phoneDisplay || "(703) 555-1212";
+  var phoneTel = cfg.phoneTel || "+17035551212";
   var formEndpoint =
     cfg.formEndpoint ||
     "https://formsubmit.co/ajax/" + (cfg.formEmail || "hello@leesburgceramiccoating.com");
